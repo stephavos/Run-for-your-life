@@ -13,25 +13,18 @@ public class Tile extends Element implements ITile{
 		else {this.counter=500;}
 	}
 	
-	
-	private boolean activated= false;
+	private boolean activated = false;
 	private int counter;
-	
-	
-	
-	
-	
-	
+
 	public void reduce() {
 		if(activated) {
 			this.counter --;
-			this.setColor(Color.red);
+			this.setColor(Color.RED);
 			this.setChanged();
 			this.notifyObservers();
 		}
 		if(counter<=0)
-			this.setColor(Color.black);
-		
+			this.setColor(Color.BLACK);
 	}
 	
 	public int getCounter() {
@@ -46,6 +39,4 @@ public class Tile extends Element implements ITile{
 		this.activated = activated;
 	}
 	
-	
-
 }
