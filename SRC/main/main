@@ -6,7 +6,12 @@ import model.ILvl;
 import model.Lvl;
 import view.Frame;
 import view.IView;
-
+/**
+ * 
+ * @author Sutibun
+ *
+ * Main class
+ */
 public abstract class Main {
 
     public static void main(final String[] args) {
