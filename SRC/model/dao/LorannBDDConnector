@@ -5,6 +5,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+/**
+ * @author Sutibun
+ *
+ */
 final class LorannBDDConnector {
 
 
@@ -18,6 +23,9 @@ final class LorannBDDConnector {
         this.open();
     }
 
+    /**
+     * @return
+     */
     public static LorannBDDConnector getInstance() {
         if (instance == null) {
             setInstance(new LorannBDDConnector());
@@ -25,10 +33,16 @@ final class LorannBDDConnector {
         return instance;
     }
 
+    /**
+     * @param instance
+     */
     private static void setInstance(final LorannBDDConnector instance) {
         LorannBDDConnector.instance = instance;
     }
 
+    /**
+     * @return
+     */
     private boolean open() {
         try {
             this.connection = DriverManager.getConnection(LorannBDDConnector.url, LorannBDDConnector.user,
@@ -41,6 +55,10 @@ final class LorannBDDConnector {
         return false;
     }
 
+    /**
+     * @param query
+     * @return
+     */
     public ResultSet executeQuery(final String query) {
         try {
             return this.getStatement().executeQuery(query);
@@ -50,6 +68,10 @@ final class LorannBDDConnector {
         return null;
     }
 
+    /**
+     * @param query
+     * @return
+     */
     public java.sql.CallableStatement prepareCall(final String query) {
         try {
             return this.getConnection().prepareCall(query);
@@ -59,6 +81,10 @@ final class LorannBDDConnector {
         return null;
     }
 
+    /**
+     * @param query
+     * @return
+     */
     public int executeUpdate(final String query) {
         try {
             return this.statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
@@ -68,18 +94,30 @@ final class LorannBDDConnector {
         return 0;
     }
 
+    /**
+     * @return
+     */
     public Connection getConnection() {
         return this.connection;
     }
 
+    /**
+     * @param connection
+     */
     public void setConnection(final Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * @return
+     */
     public Statement getStatement() {
         return this.statement;
     }
 
+    /**
+     * @param statement
+     */
     public void setStatement(final Statement statement) {
         this.statement = statement;
     }
