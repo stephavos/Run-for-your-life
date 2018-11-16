@@ -1,12 +1,8 @@
 package model;
 
 public interface IClock {
-	
-	
 	public void start();
-	
-	
 	public void stop();
-	
 	public double getTime();
 }
+
