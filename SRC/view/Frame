@@ -1,0 +1,92 @@
+package view;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.ILvl;
+
+public class Frame extends JFrame implements KeyListener, IView {
+	
+	private static final long serialVersionUID = -7393744101067014109L;
+	private int width;
+	private int height;
+	private Display display;
+	private ILvl Lvl;
+	
+	public Frame(ILvl Lvl) {
+		this.setTitle("Run-for-your-life");
+		this.Lvl = Lvl;
+		this.width=Lvl.getWidth()*Lvl.getPixels();
+		this.height=(Lvl.getHeight()+1)*Lvl.getPixels();
+		this.display = new Display(this.Lvl);
+	    this.setContentPane(this.display);
+	    this.setSize(width, height);
+		this.setLocationRelativeTo(null);
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    this.addKeyListener(this);
+		this.setVisible(true);
+	}
+	@Override
+	public final void keyPressed(final KeyEvent keyEvent) {
+  	
+  	switch(keyEvent.getKeyCode()) {
+	  	case KeyEvent.VK_RIGHT: Lvl.getrunner().moveRIGHT();break;
+	  	case KeyEvent.VK_LEFT: Lvl.getrunner().moveLEFT();break;
+	  	case KeyEvent.VK_UP: Lvl.getrunner().moveUP();break;
+	  	case KeyEvent.VK_DOWN: Lvl.getrunner().moveDOWN();break;
+	  	default:break; 		  	
+  		}
+	}
+
+	public final void keyTyped(final KeyEvent keyEvent) {
+		this.keyCodeToUserOrder(keyEvent.getKeyCode());
+	}
+	    
+	private void keyCodeToUserOrder(int keyCode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void repaint() {
+		this.display.repaint();
+	}
+
+	public Display getDisplay() {
+		return display;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}	
+	public void setDisplay(Display Display) {
+		this.display = Display;	
+	}
+	
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	
+	@Override
+	public void displayMessage(String message) {
+		JOptionPane.showMessageDialog(null, message);
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));	
+	}
+	
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
