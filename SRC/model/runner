@@ -3,11 +3,20 @@ package model;
 
 import java.awt.Color;
 
+/**
+ * @author Sutibun
+ *
+ */
 public class runner extends Element implements IRunner{
 	private boolean alive = true;
 	public Lvl level;
 	private Lvl lvl;
 	
+	/**
+	 * @param x
+	 * @param y
+	 * @param level
+	 */
 	public runner(int x, int y, Lvl level) {
 		super(x, y);
 		this.setColor(Color.BLUE);
@@ -15,6 +24,10 @@ public class runner extends Element implements IRunner{
 	}
 	
 	
+	/**
+	 * @param x
+	 * @param y
+	 */
 	public void moveToXY(int x , int y) {
 		for (ITile elem : ((ILvl) lvl).getMap()) {
 			if(elem.getX() == this.x && elem.getY()==this.y) {
