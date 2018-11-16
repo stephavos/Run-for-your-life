@@ -5,12 +5,20 @@ import java.awt.Rectangle;
 import java.util.Observer;
 import javax.swing.JFrame;
 
+/**
+ * @author Sutibun
+ *
+ */
 public class BoardFrame extends JFrame implements IBoard {
 
     private static final long serialVersionUID = -6563585351564617603L;
     private static final int  defaultFrameSize = 700;
     private final BoardPanel  boardPanel;
     
+    /**
+     * @param title
+     * @param decorated
+     */
     public BoardFrame(final String title, final Boolean decorated) {
         super();
         this.setTitle(title);
@@ -24,6 +32,9 @@ public class BoardFrame extends JFrame implements IBoard {
         this.setVisible(true);
     }
     
+    /**
+     * @param title
+     */
     public BoardFrame(final String title) {
         this(title, false);
     }
@@ -32,60 +43,99 @@ public class BoardFrame extends JFrame implements IBoard {
         this("", false);
     }
 
+    /**
+     * @param decorated
+     */
     public BoardFrame(final Boolean decorated) {
         this("", decorated);
     }
     
+    /* (non-Javadoc)
+     * @see showboard.IBoard#addSquare(showboard.ISquare, int, int)
+     */
     @Override
     public final void addSquare(final ISquare square, final int x, final int y) {
         this.getBoardPanel().addSquare(square, x, y);
     }
 
+    /* (non-Javadoc)
+     * @see showboard.IBoard#addPawn(showboard.IPawn)
+     */
     @Override
     public final void addPawn(final IPawn pawn) {
         this.getBoardPanel().addPawn(pawn);
     }
 
+    /* (non-Javadoc)
+     * @see showboard.IBoard#getObserver()
+     */
     @Override
     public final Observer getObserver() {
         return this.getBoardPanel();
     }
 
+    /* (non-Javadoc)
+     * @see showboard.IBoard#setDimension(java.awt.Dimension)
+     */
     @Override
     public final void setDimension(final Dimension dimension) {
         this.getBoardPanel().setDimension(dimension);
     }
 
+    /* (non-Javadoc)
+     * @see showboard.IBoard#getDimension()
+     */
     @Override
     public final Dimension getDimension() {
         return this.getBoardPanel().getDimension();
     }
 
+    /**
+     * @return
+     */
     public final Rectangle getDisplayFrame() {
         return this.getBoardPanel().getDisplayFrame();
     }
 
+    /* (non-Javadoc)
+     * @see showboard.IBoard#setDisplayFrame(java.awt.Rectangle)
+     */
     @Override
     public final void setDisplayFrame(final Rectangle displayFrame) {
         this.getBoardPanel().setDisplayFrame(displayFrame);
     }
 
+    /**
+     * @return
+     */
     private BoardPanel getBoardPanel() {
         return this.boardPanel;
     }
 
+    /**
+     * @return
+     */
     public final Boolean isWidthLooped() {
         return this.getBoardPanel().isWidthLooped();
     }
 
+    /**
+     * @param widthLooped
+     */
     public final void setWidthLooped(final Boolean widthLooped) {
         this.getBoardPanel().setWidthLooped(widthLooped);
     }
 
+    /**
+     * @return
+     */
     public final Boolean isHeightLooped() {
         return this.getBoardPanel().isHeightLooped();
     }
 
+    /**
+     * @param heightLooped
+     */
     public final void setHeightLooped(final Boolean heightLooped) {
         this.getBoardPanel().setHeightLooped(heightLooped);
     }
