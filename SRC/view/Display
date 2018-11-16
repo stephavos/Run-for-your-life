@@ -1,0 +1,64 @@
+package view;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JPanel;
+import model.ILvl;
+import model.ITile;
+
+public class Display extends JPanel implements Observer {
+
+	private static final long serialVersionUID = 1L;
+	private ILvl Lvl;
+	
+	public Display(ILvl Lvl) {
+		this.setBackground(Color.BLACK);
+		this.setVisible(true);
+		System.out.println("Affichage");
+		this.Lvl = Lvl;
+		
+		for (ITile tile : Lvl.getMap()) {
+			((Observable) tile).addObserver(this);
+		}
+		((Observable) Lvl.getrunner()).addObserver(this);
+		
+	}
+	
+	public void drawGrid(Graphics g)throws IOException, InterruptedException {
+		for (ITile tile : Lvl.getMap()) {
+			g.setColor(tile.getColor());
+			g.fillRect(
+					tile.getX()*Lvl.getPixels(),
+					tile.getY()*Lvl.getPixels(),
+					Lvl.getPixels(),
+					Lvl.getPixels()
+					);
+		}
+		
+		g.setColor(Lvl.getrunner().getColor());
+		g.fillRect(
+			Lvl.getrunner().getX()*Lvl.getPixels(),
+			Lvl.getrunner().getY()*Lvl.getPixels(),
+			Lvl.getPixels(),
+			Lvl.getPixels());
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+			 try {
+				drawGrid(g);
+			} 
+			 catch (IOException | InterruptedException e) {
+				e.printStackTrace();
+			}
+	     
+	}
+	@Override
+	public void update(Observable o, Object arg) {
+		this.repaint();
+	}
+
+}
