@@ -6,7 +6,6 @@ import java.util.Observer;
 
 public interface IBoard {
 
-
     void addSquare(ISquare square, int x, int y);
 
     void addPawn(IPawn pawn);
