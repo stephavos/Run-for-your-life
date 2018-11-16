@@ -1,0 +1,22 @@
+package model;
+
+public class Clock implements IClock{
+	private double clock;
+	
+	public Clock(){
+		clock=0;
+	}
+	
+	public void start() {
+		this.clock=System.currentTimeMillis();
+	}
+	
+	public void stop() {
+		this.clock=(System.currentTimeMillis()-clock)/1000;
+	}
+
+	public double getTime() {
+		return this.clock;
+	}
+	
+}
